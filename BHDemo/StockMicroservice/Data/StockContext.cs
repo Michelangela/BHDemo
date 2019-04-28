@@ -17,8 +17,20 @@ namespace StockMicroservice.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
-            modelBuilder.Entity<Stock>().ToTable("Stock");
+            modelBuilder.Entity<Stock>().HasData(new Stock
+            {
+                Id = 1,
+                Symbol = "AMZN",
+                Date = new DateTime(2019, 04, 23),
+                Price = 1923.77M
+
+            }, new Stock
+            {
+                Id = 2,
+                Symbol = "AMZN",
+                Date = new DateTime(2019, 04, 24),
+                Price = 1902.00M
+            });
         }
     }
 }
