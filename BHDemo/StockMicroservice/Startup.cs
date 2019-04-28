@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StockMicroservice.Data;
+using StockMicroservice.Models;
+using StockMicroservice.Models.Repository;
+using StockMicroservice.Models.DataManager;
 
 namespace StockMicroservice
 {
@@ -26,9 +29,12 @@ namespace StockMicroservice
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
+            
             services.AddDbContext<StockContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IDataRepository<Stock>, StockManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
