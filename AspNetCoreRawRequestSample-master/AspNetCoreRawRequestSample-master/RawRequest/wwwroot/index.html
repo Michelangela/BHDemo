@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Comment</h2>
+        <p>Please enter a text consisting of multiple phrases in the textarea below:</p>
+        <form>
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+
+
+        </form>
+
+        <button onclick="myFunction()">Try it</button>
+
+
+
+        <script>
+            function myFunction() {
+                var inputComment = $('#comment').val();
+
+               $.ajax({
+                    type: "POST",
+                    url: "api/BodyTypes/JsonStringBody",
+                    data: inputComment,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+
+                        $('#demo').val(data);
+                    },
+                    failure: function (response) {
+                        alert('failure');
+                        
+                    },
+                    error: function (response) {
+                        
+                        $('#demo').val('error');
+
+                    }
+                });
+
+               
+   
+            }
+        </script>
+
+        <p id="demo"></p>
+    </div>
+
+</body>
+</html>
+
